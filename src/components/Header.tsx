@@ -29,7 +29,7 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <button onClick={() => scrollToSection('hero')} className="flex items-center">
-            <img src={logo} alt="Tattoo Studio" className="h-12 w-auto" />
+            <img src={logo} alt="ysta_ttoo" className="h-12 w-auto" />
           </button>
 
           <nav className="hidden md:flex items-center space-x-8">

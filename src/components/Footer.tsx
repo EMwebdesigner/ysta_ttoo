@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="bg-background border-t border-border py-12">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center">
-          <img src={logo} alt="Tattoo Studio" className="h-16 w-auto mb-6" />
+          <img src={logo} alt="ysta_ttoo" className="h-16 w-auto mb-6" />
           
           <div className="flex items-center space-x-6 mb-8">
             <a
@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
 
           <div className="text-center text-muted-foreground text-sm">
-            <p>&copy; {currentYear} Tattoo Studio. Todos los derechos reservados.</p>
+            <p>&copy; {currentYear} ysta_ttoo. Todos los derechos reservados.</p>
           </div>
         </div>
       </div>
