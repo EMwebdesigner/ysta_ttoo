@@ -1,8 +1,17 @@
 import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 import logo from '@/assets/logo.png';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,7 +27,15 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsOpen(false);
   };
+
+  const navItems = [
+    { id: 'about', label: 'Sobre Nosotros' },
+    { id: 'portfolio', label: 'Portfolio' },
+    { id: 'services', label: 'Servicios' },
+    { id: 'contact', label: 'Contacto' },
+  ];
 
   return (
     <header
@@ -33,30 +50,15 @@ const Header = () => {
           </button>
 
           <nav className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={() => scrollToSection('about')}
-              className="text-foreground link-underline hover:text-primary transition-colors"
-            >
-              Sobre Nosotros
-            </button>
-            <button
-              onClick={() => scrollToSection('portfolio')}
-              className="text-foreground link-underline hover:text-primary transition-colors"
-            >
-              Portfolio
-            </button>
-            <button
-              onClick={() => scrollToSection('services')}
-              className="text-foreground link-underline hover:text-primary transition-colors"
-            >
-              Servicios
-            </button>
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="text-foreground link-underline hover:text-primary transition-colors"
-            >
-              Contacto
-            </button>
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-foreground link-underline hover:text-primary transition-colors"
+              >
+                {item.label}
+              </button>
+            ))}
           </nav>
 
           <button
@@ -65,6 +67,39 @@ const Header = () => {
           >
             Reservar Turno
           </button>
+
+          {/* Mobile Menu */}
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <button className="md:hidden text-foreground p-2">
+                <Menu className="h-6 w-6" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-carbon-black border-steel-gray">
+              <SheetHeader>
+                <SheetTitle className="text-white">
+                  <img src={logo} alt="ysta_ttoo" className="h-10 w-auto" />
+                </SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col space-y-6 mt-8">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="text-left text-foreground hover:text-primary transition-colors text-lg"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="mt-4 px-6 py-3 border border-primary text-foreground hover:bg-primary hover:text-background transition-all duration-300 text-center"
+                >
+                  Reservar Turno
+                </button>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
